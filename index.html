@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CHZFD | EV Charging Solutions</title>
+    <title>Zofande | Smart Energy Solutions</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
         }
         body {
             line-height: 1.6;
             color: #333;
-            background-color: #f8f9fa;
         }
-        /* 导航栏 */
-        nav {
-            background-color: #0056b3;
-            color: white;
-            padding: 1rem 5%;
+
+        /* 顶部导航栏 */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 10px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -31,128 +31,206 @@
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
+            color: #009933; /* 品牌绿色 */
         }
-        .nav-links a {
-            color: white;
+        nav a {
+            margin: 0 15px;
             text-decoration: none;
-            margin-left: 2rem;
+            color: #333;
+            font-size: 0.9rem;
         }
-        /* 主内容区 */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 5%;
-        }
-        /* 首页横幅 */
-        .hero {
-            background: linear-gradient(rgba(0, 86, 179, 0.8), rgba(0, 86, 179, 0.8)), url('https://via.placeholder.com/1200x400');
-            background-size: cover;
+        .contact-btn {
+            background-color: #009933;
             color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+        }
+
+        /* 轮播Banner */
+        .banner {
+            height: 400px;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://via.placeholder.com/1920x400?text=Smart+Energy+For+A+Green+Future');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            padding: 4rem 5%;
-            margin-bottom: 2rem;
         }
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+        .banner h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
         }
-        /* 板块样式 */
-        section {
-            margin-bottom: 3rem;
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        .banner p {
+            font-size: 1.2rem;
         }
-        section h2 {
-            color: #0056b3;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid #0056b3;
-            padding-bottom: 0.5rem;
+
+        /* 产品展示区 */
+        .products-section {
+            padding: 50px 5%;
+            background-color: #f8f9fa;
+            text-align: center;
         }
-        /* 产品卡片 */
+        .products-section h2 {
+            color: #009933;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         .product-card {
-            border: 1px solid #eee;
+            background: white;
+            padding: 20px;
             border-radius: 8px;
-            padding: 1.5rem;
-            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .product-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+            margin-bottom: 15px;
         }
         .product-card h3 {
-            color: #0056b3;
-            margin-bottom: 0.5rem;
+            color: #333;
+            font-size: 1rem;
+            margin-bottom: 5px;
         }
+        .product-card p {
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        /* 公司数据区 */
+        .stats-section {
+            padding: 50px 5%;
+            background-color: white;
+            text-align: center;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-icon {
+            color: #009933;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .stat-text {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
         /* 页脚 */
         footer {
-            background-color: #0056b3;
-            color: white;
+            background-color: #f0f0f0;
+            padding: 30px 5%;
             text-align: center;
-            padding: 1.5rem;
-            margin-top: 2rem;
+            color: #666;
+            font-size: 0.85rem;
         }
     </style>
 </head>
 <body>
-    <!-- 导航栏 -->
-    <nav>
-        <div class="logo">CHZFD</div>
-        <div class="nav-links">
+    <!-- 顶部导航栏 -->
+    <header>
+        <div class="logo">Zofande</div>
+        <nav>
             <a href="#home">Home</a>
-            <a href="#products">Products</a>
             <a href="#about">About Us</a>
+            <a href="#products">Products</a>
             <a href="#contact">Contact</a>
+        </nav>
+        <a href="#contact" class="contact-btn">Contact Us</a>
+    </header>
+
+    <!-- 轮播Banner -->
+    <section class="banner" id="home">
+        <div>
+            <h1>Smart Energy for a Green Future</h1>
+            <p>Your Reliable Partner in EV Charging & New Energy Solutions</p>
         </div>
-    </nav>
+    </section>
 
-    <!-- 首页横幅 -->
-    <div class="hero" id="home">
-        <h1>Welcome to CHZFD</h1>
-        <p>Your Reliable Partner for New Energy Charging Solutions</p>
-    </div>
-
-    <div class="container">
-        <!-- 产品板块 -->
-        <section id="products">
-            <h2>Our Products</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <h3>DC Fast Charger</h3>
-                    <p>High-power DC chargers for public stations, supporting fast charging for most EV models.</p>
-                </div>
-                <div class="product-card">
-                    <h3>AC Wallbox Charger</h3>
-                    <p>Compact and safe AC chargers for home and commercial use.</p>
-                </div>
-                <div class="product-card">
-                    <h3>Customized Solutions</h3>
-                    <p>One-stop charging solutions for parking lots, gas stations, and industrial projects.</p>
-                </div>
+    <!-- 中间产品展示区 -->
+    <section class="products-section" id="products">
+        <h2>Our Core Products</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://via.placeholder.com/200x150?text=DC+Fast+Charger" alt="DC Fast Charger">
+                <h3>DC Fast Charger</h3>
+                <p>High-power chargers for public stations</p>
             </div>
-        </section>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/200x150?text=AC+Wallbox" alt="AC Wallbox">
+                <h3>AC Wallbox Charger</h3>
+                <p>Compact chargers for home & commercial use</p>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/200x150?text=Solar+Combiner+Box" alt="Solar Combiner Box">
+                <h3>Solar Combiner Box</h3>
+                <p>Photovoltaic DC distribution solutions</p>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/200x150?text=Switchgear" alt="Switchgear">
+                <h3>High/Low Voltage Switchgear</h3>
+                <p>Complete power distribution equipment</p>
+            </div>
+        </div>
+    </section>
 
-        <!-- 关于我们 -->
-        <section id="about">
-            <h2>About Us</h2>
-            <p>We are a professional manufacturer specializing in electric vehicle charging piles and new energy power equipment. With years of experience in the industry, we provide high-quality, reliable products and customized solutions for customers worldwide.</p>
-        </section>
-
-        <!-- 联系我们 -->
-        <section id="contact">
-            <h2>Contact Us</h2>
-            <p>Email: info@chzfd.com</p>
-            <p>Phone: +86-XXX-XXXXXXX</p>
-            <p>Address: China</p>
-        </section>
-    </div>
+    <!-- 底部公司数据区 -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-icon">🏭</div>
+                <div class="stat-number">20,000㎡</div>
+                <div class="stat-text">Factory Area</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">💰</div>
+                <div class="stat-number">¥108.8M</div>
+                <div class="stat-text">Registered Capital</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">✅</div>
+                <div class="stat-number">30+</div>
+                <div class="stat-text">Product Applications</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">👥</div>
+                <div class="stat-number">200+</div>
+                <div class="stat-text">Employees</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">⚙️</div>
+                <div class="stat-number">50+</div>
+                <div class="stat-text">Advanced Equipment</div>
+            </div>
+        </div>
+    </section>
 
     <!-- 页脚 -->
-    <footer>
-        <p>&copy; 2026 CHZFD. All rights reserved.</p>
+    <footer id="contact">
+        <p>© 2026 Zofande New Energy Group. All Rights Reserved.</p>
+        <p>Email: zofande.newenergy@gmail.com | Phone: +86-13601670499</p>
     </footer>
 </body>
 </html>
