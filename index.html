@@ -16,15 +16,14 @@
         body {
             overflow-x: hidden;
             width: 100%;
-            /* 关键：移除body的顶部padding，让页面内容从顶部开始 */
-            padding-top: 0 !important;
+            padding-top: 0;
         }
         img {
             max-width: 100%;
             height: auto;
         }
 
-        /* ------------------- 导航栏样式 ------------------- */
+        /* ------------------- 导航栏（手机端优化） ------------------- */
         .header-wrapper {
             position: fixed;
             top: 20px;
@@ -80,14 +79,13 @@
             text-decoration: none;
         }
 
-        /* ------------------- 轮播图样式（置顶修复） ------------------- */
+        /* ------------------- 轮播图 ------------------- */
         .banner-section {
             width: 100%;
             height: 100vh;
             position: relative;
             overflow: hidden;
-            /* 关键：移除轮播图的顶部间距，让它从页面最顶端开始 */
-            margin-top: 0 !important;
+            margin-top: 0;
         }
         #slider-container {
             width: 100%;
@@ -111,7 +109,7 @@
             opacity: 1;
         }
 
-        /* ------------------- 公司简介板块 ------------------- */
+        /* ------------------- 公司简介板块（手机端优化） ------------------- */
         .about-section {
             padding: 80px 5%;
             background-color: #ffffff;
@@ -159,7 +157,7 @@
             object-fit: cover;
         }
 
-        /* ------------------- 公司数据区（修复为5列） ------------------- */
+        /* ------------------- 公司数据区（手机端优化为2列） ------------------- */
         .stats-section {
             padding: 50px 5%;
             background-color: white;
@@ -168,7 +166,6 @@
         }
         .stats-grid {
             display: grid;
-            /* 关键：桌面端强制5列，适配5个数据项 */
             grid-template-columns: repeat(5, 1fr);
             gap: 20px;
             max-width: 1200px;
@@ -194,7 +191,7 @@
             font-size: 0.9rem;
         }
 
-        /* ------------------- 页脚 ------------------- */
+        /* ------------------- 页脚（手机端优化为垂直排列） ------------------- */
         footer {
             background-color: #f0f0f0;
             padding: 30px 5%;
@@ -236,7 +233,7 @@
             color: #009933;
         }
 
-        /* ------------------- 移动端适配 ------------------- */
+        /* ------------------- 手机端适配规则 ------------------- */
         @media (max-width: 1024px) {
             .desktop-nav {
                 gap: 30px;
@@ -266,26 +263,34 @@
             .about-text h2 {
                 font-size: 28px;
             }
+            .about-text p {
+                font-size: 16px;
+            }
             .about-image img {
                 height: 250px;
             }
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            footer {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px 5%;
+            }
         }
         @media (max-width: 480px) {
             .stats-grid {
                 grid-template-columns: 1fr;
             }
-            footer {
-                flex-direction: column;
-                gap: 20px;
+            .contact-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- 导航栏（悬浮在轮播图上方） -->
+    <!-- 导航栏 -->
     <div class="header-wrapper">
         <header>
             <div class="logo">
@@ -306,7 +311,7 @@
         </header>
     </div>
 
-    <!-- 轮播图（从页面最顶端开始，导航栏悬浮在上方） -->
+    <!-- 轮播图 -->
     <section class="banner-section">
         <div id="slider-container">
             <div class="slide" style="background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('headpic1.png') center/cover no-repeat;"></div>
@@ -347,7 +352,7 @@
         </div>
     </section>
 
-    <!-- 公司数据区（电脑端5列） -->
+    <!-- 公司数据区 -->
     <section class="stats-section">
         <div class="stats-grid">
             <div class="stat-item">
