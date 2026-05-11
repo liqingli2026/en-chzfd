@@ -2,40 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zofande | Smart Energy Solutions</title>
     <link rel="icon" href="logo.ico" type="image/x-icon">
-
     <style>
-
-html {
-    overflow-y: scroll;
-}
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: Arial, sans-serif;
+            max-width: 100% !important;
         }
         body {
-            line-height: 1.6;
-            color: #333;
+            overflow-x: hidden;
+            width: 100%;
+            padding-top: 80px; /* 适配固定导航 */
+        }
+        img {
+            max-width: 100%;
+            height: auto;
         }
 
-        /* 顶部导航栏 */
-.nav-link {
-      position: relative;
-      padding: 8px 12px;
-      border-radius: 8px;
-      transition: all 0.3s ease; /* 过渡动画，让效果更丝滑 */
-    }
-    .nav-link:hover {
-      transform: translateY(-3px); /* 向上移动3px，形成突起 */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 增加阴影，强化突起感 */
-      color: #009933; /* 文字变品牌绿，增强提示 */
-      background-color: rgba(0, 153, 51, 0.05); /* 轻微背景色，提升视觉 */
-    }
-.nav-link.active {
+        /* 顶部导航栏 - 响应式核心优化 */
+        .nav-link {
+            position: relative;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease; /* 过渡动画，让效果更丝滑 */
+        }
+        .nav-link:hover {
+            transform: translateY(-3px); /* 向上移动3px，形成突起 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 增加阴影，强化突起感 */
+            color: #009933; /* 文字变品牌绿，增强提示 */
+            background-color: rgba(0, 153, 51, 0.05); /* 轻微背景色，提升视觉 */
+        }
+        .nav-link.active {
             transform: translateY(-3px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             color: #009933;
@@ -44,57 +45,83 @@ html {
         }
         .header-wrapper {
             position: fixed;
-            top: 20px;
+            top: 0px;
             left: 0;
             right: 0;
             max-width: 2400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 10px; /* 手机端减少左右内边距 */
             z-index: 999;
         }
         header {
             background-color: white;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            padding: 10px 5%;
+            padding: 10px 2%; /* 响应式内边距 */
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
-            top: 20px;
+            top: 10px; /* 手机端减少顶部距离 */
             z-index: 100;
+            border-radius: 20px;
+            border:1px solid #eee;
         }
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #009933; /* 品牌绿色 */
+        .logo img {
+            height: 50px; /* 基础logo高度 */
         }
-   
-        nav a {
-            margin: 0 15px;
+        /* 桌面端导航 */
+        .desktop-nav {
+            display: flex;
+            gap: 20px; /* 桌面端间距 */
+        }
+        .desktop-nav a {
+            margin: 0 8px;
             text-decoration: none;
             color: #333;
             font-size: 0.9rem;
         }
-      /* 电脑端恢复原来的间距 */
-       @media (min-width: 768px) {
-          nav {
-        justify-content: flex-start;
-     gap: 90px; /* 你原来的导航间距 */
-       }
-       nav a {
-            margin: 0 15px;
-          }
-       }
-        .contact-btn {
-            background-color: #009933;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
+        /* 移动端导航开关 */
+        .mobile-nav-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #333;
+        }
+        /* 移动端导航菜单 */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            flex-direction: column;
+            padding: 20px;
+            z-index: 99;
+        }
+        .mobile-nav a {
+            padding: 15px 20px;
             text-decoration: none;
-font-size: 0.9rem;
+            color: #333;
+            font-size: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .header-actions .contact-btn {
+            background-color:#009933; 
+            color:white; 
+            padding:8px 18px; 
+            border-radius:20px; 
+            text-decoration:none;
+            font-size: 0.9rem;
         }
 
-        /* 轮播Banner */
+        /* 轮播Banner - 响应式高度 */
         .banner {
             height: 400px;
             background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://via.placeholder.com/1920x400?text=Smart+Energy+For+A+Green+Future');
@@ -114,16 +141,90 @@ font-size: 0.9rem;
             font-size: 1.2rem;
         }
 
-               /* 公司数据区 */
+        /* 轮播图容器 - 响应式优化 */
+        .slider-section {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        #slider-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        /* 公司简介板块 - 响应式 */
+        .about-section {
+            padding: 50px 2%; /* 响应式内边距 */
+            background-color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+        .about-text h2 {
+            color: #009933;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .about-text p {
+            color: #666;
+            line-height: 1.8;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .about-text .btn {
+            display: inline-block;
+            background-color: #009933;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .about-text .btn:hover {
+            background-color: #007a28;
+        }
+        .about-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        .about-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        /* 公司数据区 - 响应式 */
         .stats-section {
-            padding: 50px 5%;
+            padding: 50px 2%;
             background-color: white;
             text-align: center;
         }
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* 适配更小宽度 */
+            gap: 20px;
             max-width: 1000px;
             margin: 0 auto;
         }
@@ -145,150 +246,208 @@ font-size: 0.9rem;
             font-size: 0.9rem;
         }
 
-        /* 页脚 */
+        /* 页脚 - 响应式 */
         footer {
             background-color: #f0f0f0;
-            padding: 30px 5%;
-            text-align: center;
+            padding: 30px 2%;
             color: #666;
             font-size: 0.85rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 90;
+            min-height: 140px;
+        }
+        .footer-info {
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+        }
+        .footer-wechat {
+            text-align: center;
+            width: 120px;
+            min-width: 120px;
+        }
+        .footer-catalog {
+            text-align: center;
+            width: 150px;
+            min-width: 150px;
+        }
+        .footer-catalog a {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+        .footer-catalog a:hover {
+            color: #009933;
+        }
+        .footer-catalog .icon {
+            font-size: 60px;
+            line-height: 1;
+            margin-bottom: 6px;
+            color: #009933;
+        }
+
+        /* 媒体查询 - 平板/手机适配 (768px是常用断点) */
+        @media (max-width: 768px) {
+            /* 导航适配 */
+            .desktop-nav {
+                display: none;
+            }
+            .mobile-nav-toggle {
+                display: block;
+            }
+            .mobile-nav.active {
+                display: flex;
+            }
+            header {
+                padding: 8px 5%;
+                top: 5px;
+            }
+            .logo img {
+                height: 40px; /* 手机端缩小logo */
+            }
+            .header-actions .contact-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+
+            /* 轮播图高度适配 */
+            .slider-section {
+                height: 60vh; /* 手机端降低轮播高度 */
+            }
+
+            /* 公司简介布局改为单列 */
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .about-text h2 {
+                font-size: 28px; /* 手机端缩小标题 */
+            }
+            .about-text p {
+                font-size: 16px;
+            }
+            .about-image img {
+                height: 250px; /* 手机端缩小图片高度 */
+            }
+
+            /* 数据区适配 */
+            .stats-grid {
+                gap: 15px;
+            }
+            .stat-icon {
+                font-size: 2rem;
+            }
+            .stat-number {
+                font-size: 1.2rem;
+            }
+
+            /* 页脚适配 */
+            footer {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px 5%;
+            }
+            .footer-wechat, .footer-catalog {
+                width: 100%;
+            }
+        }
+
+        /* 小屏手机额外适配 (480px以下) */
+        @media (max-width: 480px) {
+            .banner h1 {
+                font-size: 2rem;
+            }
+            .banner p {
+                font-size: 1rem;
+            }
+            .stat-item {
+                padding: 10px 0;
+            }
+            .footer-catalog .icon {
+                font-size: 40px;
+            }
         }
     </style>
 </head>
 <body>
     <!-- 顶部导航栏 -->
-    <div style="position: fixed; top: 20px; left: 0; right: 0; max-width: 2400px; margin: 0 auto; padding: 0 20px;z-index: 999;">
-  <header style="background-color: #ffffff; border:1px solid #eee; padding:6px 200px; display:flex; align-items:center; border-radius:20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-    <div style="display:flex; align-items:center;">
-      <img src="logo.png" alt="Logo" style="height:70px;">
-    </div>
+    <div class="header-wrapper">
+        <header>
+            <div class="logo">
+                <img src="logo.png" alt="Logo">
+            </div>
 
-     <nav style="display:flex; gap:90px;">
-            <!-- 为每个导航项添加 onclick 事件，触发激活逻辑 -->
-            <a href="index.html" class="nav-link" id="nav-home" text-decoration: none; font-size: 1.2rem; font-weight: 500;" onclick="setActiveNav('nav-home')">Home</a>
-            <a href="about.html" class="nav-link" id="nav-about" text-decoration: none; font-size: 1.2rem; font-weight: 500;" onclick="setActiveNav('nav-about')">About Us</a>
-            <a href="products.html" class="nav-link" id="nav-products" text-decoration: none; font-size: 1.2rem; font-weight: 500;" onclick="setActiveNav('nav-products')">Products</a>
-            <a href="contact.html" class="nav-link" id="nav-contact" text-decoration: none; font-size: 1.2rem; font-weight: 500;" onclick="setActiveNav('nav-contact')">Contact</a>
+            <!-- 桌面端导航 -->
+            <nav class="desktop-nav">
+                <a href="index.html" class="nav-link" id="nav-home" onclick="setActiveNav('nav-home')">Home</a>
+                <a href="about.html" class="nav-link" id="nav-about" onclick="setActiveNav('nav-about')">About Us</a>
+                <a href="products.html" class="nav-link" id="nav-products" onclick="setActiveNav('nav-products')">Products</a>
+                <a href="contact.html" class="nav-link" id="nav-contact" onclick="setActiveNav('nav-contact')">Contact</a>
+            </nav>
+
+            <!-- 移动端导航开关 -->
+            <div class="mobile-nav-toggle" onclick="toggleMobileNav()">
+                ☰
+            </div>
+
+            <div class="header-actions">
+                <span>🔍</span>
+                <a href="#contact" class="contact-btn">Contact Us</a>
+            </div>
+        </header>
+
+        <!-- 移动端导航菜单 -->
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html" class="nav-link" id="mobile-nav-home" onclick="setActiveNav('nav-home'); toggleMobileNav()">Home</a>
+            <a href="about.html" class="nav-link" id="mobile-nav-about" onclick="setActiveNav('nav-about'); toggleMobileNav()">About Us</a>
+            <a href="products.html" class="nav-link" id="mobile-nav-products" onclick="setActiveNav('nav-products'); toggleMobileNav()">Products</a>
+            <a href="contact.html" class="nav-link" id="mobile-nav-contact" onclick="setActiveNav('nav-contact'); toggleMobileNav()">Contact</a>
         </nav>
-
-    <div style="display:flex; align-items:center; gap:15px;">
-      <span>🔍</span>
-      <a href="#contact" style="background-color:#009933; color:white; padding:8px 18px; border-radius:20px; text-decoration:none;">Contact Us</a>
     </div>
-  </header>
-</div>
 
     <!-- 轮播Banner -->
-<section style="
-  width: 100%;
-  height: 100vh;
-  position: relative;
-  overflow: hidden;
-">
-  <!-- 轮播图容器 -->
-  <div id="slider-container" style="
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-  ">
-    <!-- 第一张图 -->
-    <div class="slide" style="
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('headpic1.png') center/cover no-repeat;
-      opacity: 1;
-      transition: opacity 1s ease-in-out;
-    "></div>
-
-    <!-- 第二张图 -->
-    <div class="slide" style="
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('headpic2.png') center/cover no-repeat;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    "></div>
-
-<div class="slide" style="
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('headpic3.png') center/cover no-repeat;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    "></div>
-  </div>
-  
-
-<!-- 轮播控制 JS -->
-<script>
-  const slides = document.querySelectorAll('.slide');
-  let current = 0;
-
-  function showSlide(index) {
-    slides.forEach((slide, i) => {
-      slide.style.opacity = (i === index) ? 1 : 0;
-    });
-  }
-
-  function nextSlide() {
-    current = (current + 1) % slides.length;
-    showSlide(current);
-  }
-
-  // 每 5 秒切换一次（可改）
-  setInterval(nextSlide, 2000);
-</script>
-        
+    <section class="slider-section">
+        <div id="slider-container">
+            <!-- 第一张图 -->
+            <div class="slide" style="background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('headpic1.png') center/cover no-repeat; opacity: 1;"></div>
+            <!-- 第二张图 -->
+            <div class="slide" style="background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('headpic2.png') center/cover no-repeat;"></div>
+            <!-- 第三张图 -->
+            <div class="slide" style="background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('headpic3.png') center/cover no-repeat;"></div>
+        </div>
     </section>
 
- <!-- 公司简介板块（替代原来的产品区） -->
-<section style="
-  padding: 80px 5%;
-  background-color: #ffffff;
-  max-width: 1200px;
-  margin: 0 auto;
-">
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center;">
-    <!-- 左侧文字 -->
-    <div>
-      <h2 style="color: #009933; font-size: 36px; margin-bottom: 20px;">About Zofande</h2>
-      <p style="color: #666; line-height: 1.8; font-size: 18px; margin-bottom: 15px;">
-        Zofande New Energy is a leading provider of EV charging equipment and smart energy solutions. With over 10 years of industry experience, we focus on delivering safe, efficient, and reliable products for global customers.
-      </p>
-      <p style="color: #666; line-height: 1.8; font-size: 18px; margin-bottom: 30px;">
-        Our products have obtained multiple international certifications and are widely used in public charging stations, commercial buildings, and residential communities.
-      </p>
-      <a href="#about" style="
-        display: inline-block;
-        background-color: #009933;
-        color: white;
-        padding: 12px 30px;
-        border-radius: 30px;
-        text-decoration: none;
-        font-size: 16px;
-        transition: background-color 0.3s ease;
-      " onmouseover="this.style.backgroundColor='#007a28'" onmouseout="this.style.backgroundColor='#009933'">
-        Learn More About Us
-      </a>
-    </div>
+    <!-- 公司简介板块 -->
+    <section class="about-section">
+        <div class="about-grid">
+            <!-- 左侧文字 -->
+            <div class="about-text">
+                <h2>About Zofande</h2>
+                <p>
+                    Zofande New Energy is a leading provider of EV charging equipment and smart energy solutions. With over 10 years of industry experience, we focus on delivering safe, efficient, and reliable products for global customers.
+                </p>
+                <p>
+                    Our products have obtained multiple international certifications and are widely used in public charging stations, commercial buildings, and residential communities.
+                </p>
+                <a href="#about" class="btn">Learn More About Us</a>
+            </div>
+            <!-- 右侧图片 -->
+            <div class="about-image">
+                <img src="factory.jpg" alt="About Zofande">
+            </div>
+        </div>
+    </section>
 
-    <!-- 右侧图片（放一张公司/工厂/产品场景图） -->
-    <div style="border-radius: 15px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.08);">
-      <img src="factory.jpg" alt="About Zofande" style="width: 100%; height: 400px; object-fit: cover;">
-    </div>
-  </div>
-</section>
     <!-- 底部公司数据区 -->
     <section class="stats-section">
         <div class="stats-grid">
@@ -320,95 +479,103 @@ font-size: 0.9rem;
         </div>
     </section>
 
-<script>
-    function setActiveNav(activeId) {
-      const allNavLinks = document.querySelectorAll('.nav-link');
-      allNavLinks.forEach(link => link.classList.remove('active'));
-      const activeLink = document.getElementById(activeId);
-      if (activeLink) activeLink.classList.add('active');
-    }
-
-    window.addEventListener('DOMContentLoaded', function() {
-      const currentPath = window.location.pathname;
-      const currentHash = window.location.hash;
-
-      if (currentHash === '#contact') {
-        setActiveNav('nav-contact');
-      } else if (currentPath.includes('index.html') || currentPath === '/') {
-        setActiveNav('nav-home');
-      } else if (currentPath.includes('about.html')) {
-        setActiveNav('nav-about');
-      } else if (currentPath.includes('products.html')) {
-        setActiveNav('nav-products');
-      }
-    });
-  </script>
     <!-- 页脚 -->
-   <footer id="contact" style="
-    background-color: #f0f0f0;
-    padding: 30px 5%;
-    color: #666;
-    font-size: 0.85rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-    flex-wrap: wrap;
+    <footer id="contact">
+        <div class="footer-info">
+            <p>© 2026 Zofande New Energy Group. All Rights Reserved.</p>
+            <p style="margin-top: 8px;">
+                <a href="mailto:zofande.newenergy@gmail.com" style="color: #666; text-decoration: none;">
+                    zofande.newenergy@gmail.com
+                </a> | Phone: +86-13601670499
+            </p>
+        </div>
 
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 90;
-    min-height: 140px;
-">
-     <div style="text-align: center;">
-        <p>© 2026 Zofande New Energy Group. All Rights Reserved.</p>
-        <p style="margin-top: 8px;">
-            <a href="mailto:zofande.newenergy@gmail.com" style="color: #666; text-decoration: none;">
-                zofande.newenergy@gmail.com
-            </a> | Phone: +86-13601670499
-        </p>
-    </div>
-
-    <!-- 中间：微信二维码 -->
-    <div style="text-align: center; width: 120px;">
-        <img src="wechat.png" alt="WeChat QR Code" style="
-            width: 100px;
-            height: 100px;
-            border: none;
-            border-radius: 8px;
-        ">
-        <p style="margin-top: 8px;">WeChat</p>
-    </div>
-
-    <!-- 右侧：带大文档图标的下载按钮 -->
-    <div style="text-align: center; width: 150px;">
-        <a href="EVproduct.pdf" download style="
-            display: inline-flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: #666;
-            transition: all 0.3s ease;
-        "
-        onmouseover="this.style.color='#009933';"
-        onmouseout="this.style.color='#666';">
-            <!-- 大文档图标 -->
-            <div style="
-                font-size: 60px;
-                line-height: 1;
-                margin-bottom: 6px;
-                color: #009933;
+        <!-- 微信二维码 -->
+        <div class="footer-wechat">
+            <img src="wechat.png" alt="WeChat QR Code" style="
+                width: 100px;
+                height: 100px;
+                border: none;
+                border-radius: 8px;
             ">
-                📄
-            </div>
-            <!-- 文字说明 -->
-            <span style="font-size: 0.9rem; font-weight: 500;">
-                Download Product Catalog
-            </span>
-        </a>
-    </div>
-</footer>
+            <p style="margin-top: 8px;">WeChat</p>
+        </div>
 
+        <!-- 下载按钮 -->
+        <div class="footer-catalog">
+            <a href="EVproduct.pdf" download>
+                <div class="icon">📄</div>
+                <span style="font-size: 0.9rem; font-weight: 500;">
+                    Download Product Catalog
+                </span>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // 轮播图逻辑
+        const slides = document.querySelectorAll('.slide');
+        let current = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.style.opacity = (i === index) ? 1 : 0;
+            });
+        }
+
+        function nextSlide() {
+            current = (current + 1) % slides.length;
+            showSlide(current);
+        }
+
+        // 每 5 秒切换一次
+        setInterval(nextSlide, 5000);
+
+        // 移动端导航切换
+        function toggleMobileNav() {
+            const mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.toggle('active');
+        }
+
+        // 导航激活逻辑
+        function setActiveNav(activeId) {
+            // 桌面端导航激活
+            const allDesktopLinks = document.querySelectorAll('.desktop-nav .nav-link');
+            allDesktopLinks.forEach(link => link.classList.remove('active'));
+            const activeDesktopLink = document.getElementById(activeId);
+            if (activeDesktopLink) activeDesktopLink.classList.add('active');
+
+            // 移动端导航激活
+            const allMobileLinks = document.querySelectorAll('.mobile-nav .nav-link');
+            allMobileLinks.forEach(link => link.classList.remove('active'));
+            const activeMobileLink = document.getElementById('mobile-' + activeId);
+            if (activeMobileLink) activeMobileLink.classList.add('active');
+        }
+
+        // 页面加载时激活对应导航
+        window.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            const currentHash = window.location.hash;
+
+            if (currentHash === '#contact') {
+                setActiveNav('nav-contact');
+            } else if (currentPath.includes('index.html') || currentPath === '/') {
+                setActiveNav('nav-home');
+            } else if (currentPath.includes('about.html')) {
+                setActiveNav('nav-about');
+            } else if (currentPath.includes('products.html')) {
+                setActiveNav('nav-products');
+            }
+        });
+
+        // 点击空白处关闭移动端导航
+        document.addEventListener('click', function(e) {
+            const mobileNav = document.getElementById('mobileNav');
+            const toggleBtn = document.querySelector('.mobile-nav-toggle');
+            if (!mobileNav.contains(e.target) && !toggleBtn.contains(e.target)) {
+                mobileNav.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
