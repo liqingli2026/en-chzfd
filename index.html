@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zofande | Smart Energy Solutions</title>
     <style>
+html {
+    overflow-y: scroll;
+}
         * {
             margin: 0;
             padding: 0;
@@ -17,6 +20,35 @@
         }
 
         /* 顶部导航栏 */
+.nav-link {
+      position: relative;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: all 0.3s ease; /* 过渡动画，让效果更丝滑 */
+    }
+    .nav-link:hover {
+      transform: translateY(-3px); /* 向上移动3px，形成突起 */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 增加阴影，强化突起感 */
+      color: #009933; /* 文字变品牌绿，增强提示 */
+      background-color: rgba(0, 153, 51, 0.05); /* 轻微背景色，提升视觉 */
+    }
+.nav-link.active {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: #009933;
+            background-color: rgba(0, 153, 51, 0.05);
+            font-weight: bold; /* 加粗强化视觉 */
+        }
+        .header-wrapper {
+            position: fixed;
+            top: 20px;
+            left: 0;
+            right: 0;
+            max-width: 2400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            z-index: 999;
+        }
         header {
             background-color: white;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -25,7 +57,7 @@
             justify-content: space-between;
             align-items: center;
             position: sticky;
-            top: 0;
+            top: 20px;
             z-index: 100;
         }
         .logo {
@@ -67,47 +99,7 @@
             font-size: 1.2rem;
         }
 
-        /* 产品展示区 */
-        .products-section {
-            padding: 50px 5%;
-            background-color: #f8f9fa;
-            text-align: center;
-        }
-        .products-section h2 {
-            color: #009933;
-            margin-bottom: 30px;
-            font-size: 1.8rem;
-        }
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .product-card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        .product-card img {
-            width: 100%;
-            height: 150px;
-            object-fit: contain;
-            margin-bottom: 15px;
-        }
-        .product-card h3 {
-            color: #333;
-            font-size: 1rem;
-            margin-bottom: 5px;
-        }
-        .product-card p {
-            color: #666;
-            font-size: 0.85rem;
-        }
-
-        /* 公司数据区 */
+               /* 公司数据区 */
         .stats-section {
             padding: 50px 5%;
             background-color: white;
@@ -150,52 +142,138 @@
 </head>
 <body>
     <!-- 顶部导航栏 -->
-    <header>
-        <div class="logo">Zofande</div>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#about">About Us</a>
-            <a href="#products">Products</a>
-            <a href="#contact">Contact</a>
+    <div style="position: fixed; top: 20px; left: 0; right: 0; max-width: 2400px; margin: 0 auto; padding: 0 20px;z-index: 999;">
+  <header style="background-color: #ffffff; border:1px solid #eee; padding:6px 200px; display:flex; align-items:center; border-radius:20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+    <div style="display:flex; align-items:center;">
+      <img src="logo.png" alt="Logo" style="height:70px;">
+    </div>
+
+     <nav style="display:flex; gap:90px;">
+            <!-- 为每个导航项添加 onclick 事件，触发激活逻辑 -->
+            <a href="index.html" class="nav-link" id="nav-home" text-decoration: none; font-size: 2.5rem; font-weight: 500;" onclick="setActiveNav('nav-home')">Home</a>
+            <a href="about.html" class="nav-link" id="nav-about" text-decoration: none; font-size: 2.5rem; font-weight: 500;" onclick="setActiveNav('nav-about')">About Us</a>
+            <a href="products.html" class="nav-link" id="nav-products" text-decoration: none; font-size: 2.5rem; font-weight: 500;" onclick="setActiveNav('nav-products')">Products</a>
+            <a href="contact.html" class="nav-link" id="nav-contact" text-decoration: none; font-size: 2.5rem; font-weight: 500;" onclick="setActiveNav('nav-contact')">Contact</a>
         </nav>
-        <a href="#contact" class="contact-btn">Contact Us</a>
-    </header>
+
+    <div style="display:flex; align-items:center; gap:15px;">
+      <span>🔍</span>
+      <a href="#contact" style="background-color:#009933; color:white; padding:8px 18px; border-radius:20px; text-decoration:none;">Contact Us</a>
+    </div>
+  </header>
+</div>
 
     <!-- 轮播Banner -->
-    <section class="banner" id="home">
-        <div>
-            <h1>Smart Energy for a Green Future</h1>
-            <p>Your Reliable Partner in EV Charging & New Energy Solutions</p>
-        </div>
+<section style="
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+">
+  <!-- 轮播图容器 -->
+  <div id="slider-container" style="
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  ">
+    <!-- 第一张图 -->
+    <div class="slide" style="
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('headpic1.png') center/cover no-repeat;
+      opacity: 1;
+      transition: opacity 1s ease-in-out;
+    "></div>
+
+    <!-- 第二张图 -->
+    <div class="slide" style="
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('headpic2.png') center/cover no-repeat;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    "></div>
+
+<div class="slide" style="
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('headpic3.png') center/cover no-repeat;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    "></div>
+  </div>
+  
+
+<!-- 轮播控制 JS -->
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let current = 0;
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.style.opacity = (i === index) ? 1 : 0;
+    });
+  }
+
+  function nextSlide() {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+  }
+
+  // 每 5 秒切换一次（可改）
+  setInterval(nextSlide, 2000);
+</script>
+        
     </section>
 
-    <!-- 中间产品展示区 -->
-    <section class="products-section" id="products">
-        <h2>Our Core Products</h2>
-        <div class="product-grid">
-            <div class="product-card">
-                <img src="https://via.placeholder.com/200x150?text=DC+Fast+Charger" alt="DC Fast Charger">
-                <h3>DC Fast Charger</h3>
-                <p>High-power chargers for public stations</p>
-            </div>
-            <div class="product-card">
-                <img src="https://via.placeholder.com/200x150?text=AC+Wallbox" alt="AC Wallbox">
-                <h3>AC Wallbox Charger</h3>
-                <p>Compact chargers for home & commercial use</p>
-            </div>
-            <div class="product-card">
-                <img src="https://via.placeholder.com/200x150?text=Solar+Combiner+Box" alt="Solar Combiner Box">
-                <h3>Solar Combiner Box</h3>
-                <p>Photovoltaic DC distribution solutions</p>
-            </div>
-            <div class="product-card">
-                <img src="https://via.placeholder.com/200x150?text=Switchgear" alt="Switchgear">
-                <h3>High/Low Voltage Switchgear</h3>
-                <p>Complete power distribution equipment</p>
-            </div>
-        </div>
-    </section>
+ <!-- 公司简介板块（替代原来的产品区） -->
+<section style="
+  padding: 80px 5%;
+  background-color: #ffffff;
+  max-width: 1200px;
+  margin: 0 auto;
+">
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center;">
+    <!-- 左侧文字 -->
+    <div>
+      <h2 style="color: #009933; font-size: 36px; margin-bottom: 20px;">About Zofande</h2>
+      <p style="color: #666; line-height: 1.8; font-size: 18px; margin-bottom: 15px;">
+        Zofande New Energy is a leading provider of EV charging equipment and smart energy solutions. With over 10 years of industry experience, we focus on delivering safe, efficient, and reliable products for global customers.
+      </p>
+      <p style="color: #666; line-height: 1.8; font-size: 18px; margin-bottom: 30px;">
+        Our products have obtained multiple international certifications and are widely used in public charging stations, commercial buildings, and residential communities.
+      </p>
+      <a href="#about" style="
+        display: inline-block;
+        background-color: #009933;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      " onmouseover="this.style.backgroundColor='#007a28'" onmouseout="this.style.backgroundColor='#009933'">
+        Learn More About Us
+      </a>
+    </div>
 
+    <!-- 右侧图片（放一张公司/工厂/产品场景图） -->
+    <div style="border-radius: 15px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.08);">
+      <img src="factory.jpg" alt="About Zofande" style="width: 100%; height: 400px; object-fit: cover;">
+    </div>
+  </div>
+</section>
     <!-- 底部公司数据区 -->
     <section class="stats-section">
         <div class="stats-grid">
@@ -227,10 +305,95 @@
         </div>
     </section>
 
+<script>
+    function setActiveNav(activeId) {
+      const allNavLinks = document.querySelectorAll('.nav-link');
+      allNavLinks.forEach(link => link.classList.remove('active'));
+      const activeLink = document.getElementById(activeId);
+      if (activeLink) activeLink.classList.add('active');
+    }
+
+    window.addEventListener('DOMContentLoaded', function() {
+      const currentPath = window.location.pathname;
+      const currentHash = window.location.hash;
+
+      if (currentHash === '#contact') {
+        setActiveNav('nav-contact');
+      } else if (currentPath.includes('index.html') || currentPath === '/') {
+        setActiveNav('nav-home');
+      } else if (currentPath.includes('about.html')) {
+        setActiveNav('nav-about');
+      } else if (currentPath.includes('products.html')) {
+        setActiveNav('nav-products');
+      }
+    });
+  </script>
     <!-- 页脚 -->
-    <footer id="contact">
+   <footer id="contact" style="
+    background-color: #f0f0f0;
+    padding: 30px 5%;
+    color: #666;
+    font-size: 0.85rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 90;
+    min-height: 140px;
+">
+     <div style="text-align: center;">
         <p>© 2026 Zofande New Energy Group. All Rights Reserved.</p>
-        <p>Email: zofande.newenergy@gmail.com | Phone: +86-13601670499</p>
-    </footer>
+        <p style="margin-top: 8px;">
+            <a href="mailto:zofande.newenergy@gmail.com" style="color: #666; text-decoration: none;">
+                zofande.newenergy@gmail.com
+            </a> | Phone: +86-13601670499
+        </p>
+    </div>
+
+    <!-- 中间：微信二维码 -->
+    <div style="text-align: center; width: 120px;">
+        <img src="wechat.png" alt="WeChat QR Code" style="
+            width: 100px;
+            height: 100px;
+            border: none;
+            border-radius: 8px;
+        ">
+        <p style="margin-top: 8px;">WeChat</p>
+    </div>
+
+    <!-- 右侧：带大文档图标的下载按钮 -->
+    <div style="text-align: center; width: 150px;">
+        <a href="EVproduct.pdf" download style="
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #666;
+            transition: all 0.3s ease;
+        "
+        onmouseover="this.style.color='#009933';"
+        onmouseout="this.style.color='#666';">
+            <!-- 大文档图标 -->
+            <div style="
+                font-size: 60px;
+                line-height: 1;
+                margin-bottom: 6px;
+                color: #009933;
+            ">
+                📄
+            </div>
+            <!-- 文字说明 -->
+            <span style="font-size: 0.9rem; font-weight: 500;">
+                Download Product Catalog
+            </span>
+        </a>
+    </div>
+</footer>
+
 </body>
 </html>

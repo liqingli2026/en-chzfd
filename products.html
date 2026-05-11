@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Zofande</title>
+    <style>
+html {
+    overflow-y: scroll;
+}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+         body {
+            line-height: 1.6;
+            color: #333;
+            /* 关键1：让body最小高度占满视口 */
+            min-height: 100vh;
+            /* 关键2：使用flex布局，让内容区和页脚自动分配空间 */
+            display: flex;
+            flex-direction: column;
+            /* 避免fixed元素溢出导致滚动条异常 */
+            padding-bottom: 80px;
+        }
+
+
+           /* 顶部导航栏 */
+        .nav-link {
+            position: relative;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: #009933;
+            background-color: rgba(0, 153, 51, 0.05);
+        }
+
+  /* 新增：激活/点击过的样式（突起+高亮） */
+        .nav-link.active {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: #009933;
+            background-color: rgba(0, 153, 51, 0.05);
+            font-weight: bold; /* 加粗强化视觉 */
+        }
+ .header-wrapper {
+            position: fixed;
+            top: 20px;
+            left: 0;
+            right: 0;
+            max-width: 2400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            z-index: 999;
+        }
+        header {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 10px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #009933; /* 品牌绿色 */
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+            font-size: 0.9rem;
+        }
+        .contact-btn {
+            background-color: #009933;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+        }
+
+
+        /* 产品区域 */
+      .products-container {
+            max-width: 1200px;
+            /* 关键3：给内容区添加顶部间距（避开fixed导航）+ 自动填充剩余空间 */
+            margin: 120px auto auto;
+            padding: 0 20px;
+            /* 让内容区占满body剩余空间，推挤页脚到底部 */
+            flex-grow: 1;
+        }
+        .products-title {
+            text-align: center;
+            color: #009933;
+            font-size: 36px;
+            margin-bottom: 40px;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            z-index: 10;
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .product-img {
+            width: 100%;
+            height: 280px;
+            object-fit: contain;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .product-info {
+            padding: 25px;
+            flex-grow: 1;
+        }
+        .product-info h3 {
+            color: #009933;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        .product-info p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* 科幻投影参数面板 - 优化定位和显示 */
+        .product-specs {
+            position: fixed;
+            width: 650px;
+            background: #ffffff; /* 增加白色背景，避免透明导致内容看不清 */
+            z-index: 999;
+            display: none;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(0, 255, 200, 0.8), 0 0 60px rgba(0, 255, 200, 0.5);
+            transition: all 1s ease;
+            opacity: 0;
+            transform: scale(0.3);
+            overflow: hidden;
+            border: 2px solid rgba(0, 255, 200, 0.9);
+        }
+
+        /* 左边面板 - 统一顶部间距，避免重叠 */
+        .spec-left {
+            left: 20px;
+            top: 160px;
+        }
+        /* 右边面板 - 统一顶部间距，避免重叠 */
+        .spec-right {
+            right: 20px;
+            top: 160px;
+        }
+        /* 第二行左边面板 - 下移避免和第一行重叠 */
+        .spec-left.second-row {
+            top: 500px;
+        }
+        /* 第二行右边面板 - 下移避免和第一行重叠 */
+        .spec-right.second-row {
+            top: 500px;
+        }
+
+        /* 面板内图片层级 - 优化显示 */
+        .product-specs img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+            position: relative;
+            z-index: 2;
+        }
+ footer {
+            background-color: #f0f0f0;
+            padding: 30px 5%;
+            text-align: center;
+            color: #666;
+            font-size: 0.85rem;
+            /* 固定页脚在视口底部（配合body的padding-bottom避免内容被遮挡） */
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            /* 提升层级，避免被其他元素遮挡 */
+            z-index: 90;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- 导航栏 -->
+<div style="position: fixed; top: 20px; left: 0; right: 0; max-width: 2400px; margin: 0 auto; padding: 0 20px; z-index: 999;">
+    <header style="background-color: #ffffff; border:1px solid #eee; padding:6px 200px; display:flex; align-items:center; justify-content: space-between; border-radius:20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+        <div style="display:flex; align-items:center;">
+            <img src="logo.png" alt="Logo" style="height:70px;">
+        </div>
+
+        <nav style="display:flex; gap:90px;">
+            <a href="index.html" class="nav-link" id="nav-home"  text-decoration: none; font-size: 1.2rem; font-weight: 500;" onclick="setActiveNav('nav-home')">Home</a>
+            <a href="about.html" class="nav-link" id="nav-about"  text-decoration: none; font-size: 1.2rem; font-weight: 500;" onclick="setActiveNav('nav-about')">About Us</a>
+            <a href="products.html" class="nav-link" id="nav-products"  text-decoration: none; font-size: 1.2rem; font-weight: 500;" onclick="setActiveNav('nav-products')">Products</a>
+            <a href="contact.html" class="nav-link" id="nav-contact"  text-decoration: none; font-size: 1.2rem; font-weight: 500;" onclick="setActiveNav('nav-contact')">Contact</a>
+        </nav>
+
+        <div style="display:flex; align-items:center; gap:15px;">
+            <span>🔍</span>
+            <a href="index.html#contact" style="background-color:#009933; color:white; padding:8px 18px; border-radius:20px; text-decoration:none;">Contact Us</a>
+        </div>
+    </header>
+</div>
+
+<!-- 产品展示区 -->
+<section class="products-container">
+    <h2 class="products-title">Our Products</h2>
+    <!-- 优化面板类名和定位，避免内联样式混乱 -->
+    <div id="spec1" class="product-specs spec-left">
+        <img src="parameter_AC.png" alt="AC Charger Parameters">
+    </div>
+    <div id="spec2" class="product-specs spec-right">
+        <img src="parameter_30kw.png" alt="30kW DC Charger Parameters">
+    </div>
+    <div id="spec3" class="product-specs spec-left second-row">
+        <img src="parameter_480kw.png" alt="480kW DC Charger Parameters">
+    </div>
+    <div id="spec4" class="product-specs spec-right second-row">
+        <img src="parameter_stack.png" alt="Charging Stack Parameters">
+    </div>
+    
+    <div class="product-grid">
+        <!-- 1. 左上 → 向左投射图片 -->
+        <div class="product-card" onmouseenter="showSpec('spec1')" onmouseleave="hideSpec('spec1')">
+            <img src="ACcharger.png" class="product-img" alt="AC Charger">
+            <div class="product-info">
+                <h3>3.5kW/7KW/14kW/22kW AC Charger</h3>
+                <p>Compact design, stable performance, suitable for home & commercial use.</p>
+            </div>
+        </div>
+
+        <!-- 2. 右上 → 向右投射图片 -->
+        <div class="product-card" onmouseenter="showSpec('spec2')" onmouseleave="hideSpec('spec2')">
+            <img src="30kW.png" class="product-img" alt="30kW DC Charger">
+            <div class="product-info">
+                <h3>20KW/30kW/40kW DC Charger</h3>
+                <p>Fast charging, smart control, wide voltage range, high compatibility.</p>
+            </div>
+        </div>
+
+        <!-- 3. 左下 → 向左投射图片 -->
+        <div class="product-card" onmouseenter="showSpec('spec3')" onmouseleave="hideSpec('spec3')">
+            <img src="480kw.png" class="product-img" alt="480kW DC Charger">
+            <div class="product-info">
+                <h3>60KW-480kW DC Fast Charger</h3>
+                <p>High power, ultra fast charging, perfect for public stations.</p>
+            </div>
+        </div>
+
+        <!-- 4. 右下 → 向右投射图片 -->
+        <div class="product-card" onmouseenter="showSpec('spec4')" onmouseleave="hideSpec('spec4')">
+            <img src="stack.png" class="product-img" alt="Charging Stack">
+            <div class="product-info">
+                <h3>240KW/2MW Flexible Charging Stack</h3>
+                <p>High efficiency, flexible power distribution, safe and stable for commercial & industrial scenarios.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+// 优化显示逻辑，增加容错处理
+function showSpec(id) {
+  const el = document.getElementById(id);
+  if (!el) return; // 防止找不到元素报错
+  el.style.display = 'block';
+  // 触发重绘，确保过渡生效
+  setTimeout(() => {
+    el.style.opacity = '1';
+    el.style.transform = 'scale(1)';
+  }, 10);
+}
+
+// 优化隐藏逻辑，增加容错处理
+function hideSpec(id) {
+  const el = document.getElementById(id);
+  if (!el) return; // 防止找不到元素报错
+  el.style.opacity = '0';
+  el.style.transform = 'scale(0.3)';
+  // 延迟时间和CSS transition时长一致（300ms）
+  setTimeout(() => {
+    el.style.display = 'none';
+  }, 300);
+}
+
+// 增加窗口大小变化时的适配
+window.addEventListener('resize', function() {
+  const specs = document.querySelectorAll('.product-specs');
+  specs.forEach(spec => {
+    if (spec.style.display === 'block') {
+      spec.style.opacity = '0';
+      spec.style.transform = 'scale(0.3)';
+      setTimeout(() => {
+        spec.style.display = 'none';
+      }, 300);
+    }
+  });
+});
+
+    function setActiveNav(activeId) {
+      const allNavLinks = document.querySelectorAll('.nav-link');
+      allNavLinks.forEach(link => link.classList.remove('active'));
+      const activeLink = document.getElementById(activeId);
+      if (activeLink) activeLink.classList.add('active');
+    }
+
+    window.addEventListener('DOMContentLoaded', function() {
+      const currentPath = window.location.pathname;
+      const currentHash = window.location.hash;
+
+      if (currentHash === '#contact') {
+        setActiveNav('nav-contact');
+      } else if (currentPath.includes('index.html') || currentPath === '/') {
+        setActiveNav('nav-home');
+      } else if (currentPath.includes('about.html')) {
+        setActiveNav('nav-about');
+      } else if (currentPath.includes('products.html')) {
+        setActiveNav('nav-products');
+      }
+    });
+  </script>
+
+<footer id="contact" style="
+    background-color: #f0f0f0;
+    padding: 30px 5%;
+    color: #666;
+    font-size: 0.85rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 90;
+    min-height: 140px;
+">
+     <div style="text-align: center;">
+        <p>© 2026 Zofande New Energy Group. All Rights Reserved.</p>
+        <p style="margin-top: 8px;">
+            <a href="mailto:zofande.newenergy@gmail.com" style="color: #666; text-decoration: none;">
+                zofande.newenergy@gmail.com
+            </a> | Phone: +86-13601670499
+        </p>
+    </div>
+
+    <!-- 中间：微信二维码 -->
+    <div style="text-align: center; width: 120px;">
+        <img src="wechat.png" alt="WeChat QR Code" style="
+            width: 100px;
+            height: 100px;
+            border: none;
+            border-radius: 8px;
+        ">
+        <p style="margin-top: 8px;">WeChat</p>
+    </div>
+
+    <!-- 右侧：带大文档图标的下载按钮 -->
+    <div style="text-align: center; width: 150px;">
+        <a href="EVproduct.pdf" download style="
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #666;
+            transition: all 0.3s ease;
+        "
+        onmouseover="this.style.color='#009933';"
+        onmouseout="this.style.color='#666';">
+            <!-- 大文档图标 -->
+            <div style="
+                font-size: 60px;
+                line-height: 1;
+                margin-bottom: 6px;
+                color: #009933;
+            ">
+                📄
+            </div>
+            <!-- 文字说明 -->
+            <span style="font-size: 0.9rem; font-weight: 500;">
+                Download Product Catalog
+            </span>
+        </a>
+    </div>
+</footer>
+
+
+</body>
+</html>
