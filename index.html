@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Zofande | Smart Energy Solutions</title>
+    <link rel="icon" href="logo.ico" type="image/x-icon">
+
     <style>
+
 html {
     overflow-y: scroll;
 }
@@ -65,18 +68,30 @@ html {
             font-weight: bold;
             color: #009933; /* 品牌绿色 */
         }
+   
         nav a {
             margin: 0 15px;
             text-decoration: none;
             color: #333;
             font-size: 0.9rem;
         }
+      /* 电脑端恢复原来的间距 */
+       @media (min-width: 768px) {
+          nav {
+        justify-content: flex-start;
+     gap: 90px; /* 你原来的导航间距 */
+       }
+       nav a {
+            margin: 0 15px;
+          }
+       }
         .contact-btn {
             background-color: #009933;
             color: white;
             padding: 8px 20px;
             border-radius: 20px;
             text-decoration: none;
+font-size: 0.9rem;
         }
 
         /* 轮播Banner */
@@ -150,10 +165,10 @@ html {
 
      <nav style="display:flex; gap:90px;">
             <!-- 为每个导航项添加 onclick 事件，触发激活逻辑 -->
-            <a href="index.html" class="nav-link" id="nav-home" text-decoration: none; font-size: 2.5rem; font-weight: 500;" onclick="setActiveNav('nav-home')">Home</a>
-            <a href="about.html" class="nav-link" id="nav-about" text-decoration: none; font-size: 2.5rem; font-weight: 500;" onclick="setActiveNav('nav-about')">About Us</a>
-            <a href="products.html" class="nav-link" id="nav-products" text-decoration: none; font-size: 2.5rem; font-weight: 500;" onclick="setActiveNav('nav-products')">Products</a>
-            <a href="contact.html" class="nav-link" id="nav-contact" text-decoration: none; font-size: 2.5rem; font-weight: 500;" onclick="setActiveNav('nav-contact')">Contact</a>
+            <a href="index.html" class="nav-link" id="nav-home" text-decoration: none; font-size: 1.2rem; font-weight: 500;" onclick="setActiveNav('nav-home')">Home</a>
+            <a href="about.html" class="nav-link" id="nav-about" text-decoration: none; font-size: 1.2rem; font-weight: 500;" onclick="setActiveNav('nav-about')">About Us</a>
+            <a href="products.html" class="nav-link" id="nav-products" text-decoration: none; font-size: 1.2rem; font-weight: 500;" onclick="setActiveNav('nav-products')">Products</a>
+            <a href="contact.html" class="nav-link" id="nav-contact" text-decoration: none; font-size: 1.2rem; font-weight: 500;" onclick="setActiveNav('nav-contact')">Contact</a>
         </nav>
 
     <div style="display:flex; align-items:center; gap:15px;">
