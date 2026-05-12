@@ -11,7 +11,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: Arial, sans-serif;
-            max-width: 100% !important;
+           
         }
         body {
             overflow-x: hidden;
@@ -30,10 +30,11 @@
             left: 50%;
             transform: translateX(-50%);
             width: 96%;
-            max-width: 1400px;
+            max-width: 2400px;
             z-index: 999;
         }
         header {
+	
             background-color: white;
             border: 1px solid #eee;
             padding: 10px 20px;
@@ -43,17 +44,18 @@
             border-radius: 20px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
+        
         .logo img {
-            height: 70px;
+            height: 50px;
         }
         .desktop-nav {
             display: flex;
-            gap: 90px;
+            gap: 50px;
         }
         .nav-link {
             text-decoration: none;
             color: #333;
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 500;
             padding: 8px 12px;
             border-radius: 8px;
@@ -66,7 +68,64 @@
             background-color: rgba(0, 153, 51, 0.05);
             font-weight: bold;
         }
-        .header-actions {
+/* 手机端菜单按钮（汉堡图标）*/
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+ margin-left: auto;
+    padding: 0 10px;
+}
+
+/* 手机端下拉菜单 */
+.mobile-menu {
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    width: 180px;
+    padding: 15px;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+}
+.mobile-menu a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px;
+    border-radius: 8px;
+}
+.mobile-menu a.active {
+    color: #009933;
+    font-weight: bold;
+    background: rgba(0,153,51,0.05);
+}
+
+/* 手机端显示汉堡按钮，隐藏电脑导航 */
+@media (max-width: 768px) {
+    .desktop-nav {
+        display: none;
+    }
+    .menu-toggle {
+        display: block;
+    }
+.header-actions {
+        display: none !important;
+}
+.logo {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+       .header-actions {
             display: flex;
             align-items: center;
             gap: 15px;
@@ -77,34 +136,36 @@
             padding: 8px 18px;
             border-radius: 20px;
             text-decoration: none;
-        }
+            font-size: 0.9rem;
+        }      
 
-        /* ------------------- 轮播图 ✅ 手机完美适配（无文字） ------------------- */
+        /* ------------------- 轮播图 ✅ 顶到顶部 + 无空白 + 完美适配 ------------------- */
         .banner-section {
             width: 100%;
-            height: 100vh;
+            height: auto;
             position: relative;
             overflow: hidden;
             margin-top: 0;
+            background-color: #000;
         }
         #slider-container {
             width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
+            position: relative;
         }
         .slide {
             width: 100%;
-            height: 100%;
             position: absolute;
             top: 0;
             left: 0;
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
             opacity: 0;
             transition: opacity 1s ease-in-out;
+        }
+        .slide img {
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+            /* 关键：去掉 margin-top，让图片顶到顶部 */
+            margin-top: 0 !important;
         }
         .slide:first-child {
             opacity: 1;
@@ -205,34 +266,6 @@
             flex-wrap: wrap;
             min-height: 140px;
         }
-        .footer-info {
-            text-align: center;
-        }
-        .footer-wechat {
-            text-align: center;
-            width: 120px;
-        }
-        .footer-download {
-            text-align: center;
-            width: 150px;
-        }
-        .download-link {
-            display: inline-flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: #666;
-            transition: all 0.3s ease;
-        }
-        .download-link:hover {
-            color: #009933;
-        }
-        .download-icon {
-            font-size: 60px;
-            line-height: 1;
-            margin-bottom: 6px;
-            color: #009933;
-        }
 
         /* ------------------- 手机端适配 ------------------- */
         @media (max-width: 1024px) {
@@ -252,40 +285,66 @@
     </style>
 </head>
 <body>
-
-    <!-- 导航栏 -->
-    <div class="header-wrapper">
-        <header>
-            <div class="logo">
-                <img src="logo.png" alt="Zofande Logo">
-            </div>
-            <nav class="desktop-nav">
-                <a href="index.html" class="nav-link active">Home</a>
-                <a href="about.html" class="nav-link">About Us</a>
-                <a href="products.html" class="nav-link">Products</a>
-                <a href="contact.html" class="nav-link">Contact</a>
-            </nav>
-            <div class="header-actions">
-                <span>🔍</span>
-                <a href="#contact" class="contact-btn">Contact Us</a>
-            </div>
-        </header>
-    </div>
-
-    <!-- ✅ 纯图片轮播（无任何文字！手机完美适配） -->
-    <section class="banner-section">
-        <div id="slider-container">
-            <div class="slide" style="background-image: url('headpic1.png');"></div>
-            <div class="slide" style="background-image: url('headpic2.png');"></div>
-            <div class="slide" style="background-image: url('headpic3.png');"></div>
+<!-- 顶部导航栏 -->
+   <div class="header-wrapper">
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Zofande Logo">
         </div>
 
+        <!-- 电脑端导航 -->
+        <nav class="desktop-nav">
+            <a href="index.html" class="nav-link" id="nav-home">Home</a>
+            <a href="about.html" class="nav-link" id="nav-about">About</a>
+            <a href="products.html" class="nav-link" id="nav-products">Products</a>
+            <a href="contact.html" class="nav-link" id="nav-contact">Contact</a>
+        </nav>
+
+        <!-- 手机端菜单按钮 -->
+        <button class="menu-toggle" id="menuBtn">☰</button>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html" id="m-home">Home</a>
+            <a href="about.html" id="m-about">About Us</a>
+            <a href="products.html" id="m-products">Products</a>
+            <a href="contact.html" id="m-contact">Contact</a>
+        </div>
+
+        <div class="header-actions">
+            <span>🔍</span>
+            <a href="contact.html" class="contact-btn">Contact Us</a>
+        </div>
+    </header>
+</div>
+
+    <!-- 轮播图：顶到屏幕顶部 ✅ -->
+    <section class="banner-section">
+        <div id="slider-container">
+            <div class="slide">
+                <img src="headpic1.png" alt="Banner 1">
+            </div>
+            <div class="slide">
+                <img src="headpic2.png" alt="Banner 2">
+            </div>
+            <div class="slide">
+                <img src="headpic3.png" alt="Banner 3">
+            </div>
+        </div>
         <script>
             const slides = document.querySelectorAll('.slide');
             let current = 0;
             function showSlide(index) {
                 slides.forEach((slide, i) => slide.style.opacity = i === index ? 1 : 0);
             }
+            function updateSliderHeight() {
+                const firstImg = slides[0].querySelector('img');
+                const height = firstImg.offsetHeight;
+                document.getElementById('slider-container').style.height = height + 'px';
+            }
+            window.addEventListener('load', () => {
+                updateSliderHeight();
+                showSlide(0);
+            });
+            window.addEventListener('resize', updateSliderHeight);
             setInterval(() => {
                 current = (current + 1) % slides.length;
                 showSlide(current);
@@ -317,21 +376,106 @@
         </div>
     </section>
 
-    <footer id="contact">
-        <div class="footer-info">
-            <p>© 2026 Zofande New Energy Group. All Rights Reserved.</p>
-            <p>zofande.newenergy@gmail.com | +86-13601670499</p>
-        </div>
-        <div class="footer-wechat">
-            <img src="wechat.png" alt="WeChat"><p>WeChat</p>
-        </div>
-        <div class="footer-download">
-            <a href="EVproduct.pdf" download class="download-link">
-                <div class="download-icon">📄</div>
-                <span>Download Product Catalog</span>
-            </a>
-        </div>
-    </footer>
 
+
+    <!-- 导航激活+表单提交脚本 -->
+    <script>
+        // 导航激活逻辑（复用原有）
+        function setActiveNav(activeId) {
+            const allNavLinks = document.querySelectorAll('.nav-link');
+            allNavLinks.forEach(link => link.classList.remove('active'));
+            const activeLink = document.getElementById(activeId);
+            if (activeLink) activeLink.classList.add('active');
+        }
+        window.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            if (currentPath.includes('contact.html')) {
+                setActiveNav('nav-contact');
+            } else if (currentPath.includes('index.html') || currentPath === '/') {
+                setActiveNav('nav-home');
+            } else if (currentPath.includes('about.html')) {
+                setActiveNav('nav-about');
+            } else if (currentPath.includes('products.html')) {
+                setActiveNav('nav-products');
+            }
+
+            // 表单提交逻辑
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // 模拟表单提交成功
+                    alert('Your message has been sent successfully! We will reply to you as soon as possible.');
+                    contactForm.reset();
+                });
+            }
+        });
+    </script>
+
+<footer id="contact">
+     <div style="text-align: center;">
+        <p>© 2026 Zofande New Energy Group. All Rights Reserved.</p>
+        <p style="margin-top: 8px;">
+            <a href="mailto:zofande.newenergy@gmail.com" style="color: #666; text-decoration: none;">
+                zofande.newenergy@gmail.com
+            </a> | Phone: +86-13601670499
+        </p>
+    </div>
+<div class="wechat-qr" style="text-align: center;">
+    <img src="wechat.png" alt="WeChat QR Code" style="
+        border: none;
+        border-radius: 8px;
+        max-width: 90px;   /* 电脑端最大90px */
+        width: 100%;       /* 手机自动缩小 */
+        height: auto;      /* 自动等比例不变形 */
+        display: block;
+        margin: 0 auto;
+    ">
+    <p style="margin-top: 8px;">WeChat</p>
+</div>
+
+    <!-- 右侧：带大文档图标的下载按钮 -->
+    <div class="download-catalog" style="text-align: center;">
+        <a href="EVproduct.pdf" download style="
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #666;
+            transition: all 0.3s ease;
+        "
+        onmouseover="this.style.color='#009933';"
+        onmouseout="this.style.color='#666';">
+            <!-- 大文档图标 -->
+            <div class="icon" style="
+               font-size: 80px;
+                line-height: 1;
+                margin-bottom: 6px;
+                color: #009933;
+            ">
+                📄
+            </div>
+            <!-- 文字说明 -->
+            <span style="font-size: 0.8rem; font-weight: 500;">
+                Download Product Catalog
+            </span>
+        </a>
+    </div>
+</footer>
+<script>
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuBtn.addEventListener('click', () => {
+        mobileMenu.style.display = mobileMenu.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    // 点击其他地方关闭菜单
+    document.addEventListener('click', (e) => {
+        if (!menuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+            mobileMenu.style.display = 'none';
+        }
+    });
+</script>
 </body>
 </html>
