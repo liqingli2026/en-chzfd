@@ -28674,8 +28674,8 @@ border-radius: 28px;
     /*width: calc(100% + 270px);*/
     display: -webkit-flex;
     display: flex;
-    -webkit-align-items: center;
-    align-items: center;
+    -webkit-align-items: stretch;
+    align-items: stretch;
 
 }
 
@@ -28690,6 +28690,7 @@ border-radius: 28px;
     flex-shrink: 0;
     -webkit-flex-shrink: 0;
     width: 775px;
+    position: relative;
 
 }
 
@@ -28697,7 +28698,13 @@ border-radius: 28px;
 
 .he_k2p2nri img {
 
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 
 }
 
